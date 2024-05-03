@@ -1,0 +1,33 @@
+name: Docker
+
+on:
+  push:
+    branches: [ main ]
+
+permissions: write-all
+
+env:
+  IMAGE_NAME: ghcr.io/simonprinz/how-fast-am-i
+
+jobs:
+  build-latest:
+    name: Build Latest Docker Image
+    if: github.event_name == 'push' && github.ref_type == 'branch' && github.ref_name == 'main'
+    strategy:
+      matrix:
+        IMAGES:
+        - "fast"
+        - "prometheus"
+        - "grafana"
+    env:
+      VERSION: latest
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⤵️ Checkout
+        uses: actions/checkout@v4
+      - name: 🔐 Login to GitHub Container Registry
+        run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u $ --password-stdin
+      - name: 🚧 Build the Docker image
+        run: docker build . -f .docker/prod/Dockerfile -t ${IMAGE_NAME}:${{ matrix.version }}-${VERSION}
+      - name: ⤴️ Push the Docker image to GitHub Container Registry
+        run: docker push ${IMAGE_NAME}:${{ matrix.version }}-${VERSION}

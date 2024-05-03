@@ -1,0 +1,10 @@
+{
+  "name": "fast",
+  "type": "module",
+  "dependencies": {
+    "fast-cli": "^3.2.0",
+    "fastify": "^4.26.2",
+    "stopwatch-node": "^1.1.0",
+    "wait-for-observables": "^1.0.3"
+  }
+}

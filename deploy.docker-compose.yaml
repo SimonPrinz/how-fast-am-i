@@ -1,0 +1,13 @@
+version: '3.7'
+
+services:
+  fast:
+    image: ghcr.io/simonprinz/how-fast-am-i:fast-latest
+  prometheus:
+    image: ghcr.io/simonprinz/how-fast-am-i:prometheus-latest
+    depends_on:
+    - fast
+  grafana:
+    image: ghcr.io/simonprinz/how-fast-am-i:grafana-latest
+    ports:
+    - "${APP_PORT}:3000"

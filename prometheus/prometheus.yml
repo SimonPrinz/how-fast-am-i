@@ -1,0 +1,10 @@
+global:
+  scrape_interval: "90s"
+  scrape_timeout: "1m"
+
+scrape_configs:
+  - job_name: "fast"
+    metrics_path: /metrics
+    scheme: http
+    static_configs:
+      - targets: ["fast:3000"]
