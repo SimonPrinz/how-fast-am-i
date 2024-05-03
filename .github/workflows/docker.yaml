@@ -28,6 +28,6 @@ jobs:
       - name: 🔐 Login to GitHub Container Registry
         run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u $ --password-stdin
       - name: 🚧 Build the Docker image
-        run: docker build ./${{ matrix.IMAGE }} -f Dockerfile -t ${IMAGE_NAME}:${{ matrix.IMAGE }}-${VERSION}
+        run: docker build ./${{ matrix.IMAGE }} -f ${{ matrix.IMAGE }}/Dockerfile -t ${IMAGE_NAME}:${{ matrix.IMAGE }}-${VERSION}
       - name: ⤴️ Push the Docker image to GitHub Container Registry
         run: docker push ${IMAGE_NAME}:${{ matrix.IMAGE }}-${VERSION}
