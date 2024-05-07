@@ -7,7 +7,11 @@ services:
     image: ghcr.io/simonprinz/how-fast-am-i:prometheus-latest
     depends_on:
     - fast
+    volumes:
+    - "${STORAGE_DIR}/prometheus:/prometheus"
   grafana:
     image: ghcr.io/simonprinz/how-fast-am-i:grafana-latest
+    volumes:
+    - "${STORAGE_DIR}/grafana:/var/lib/grafana"
     ports:
     - "${APP_PORT}:3000"
